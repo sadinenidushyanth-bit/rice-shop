@@ -23,11 +23,16 @@
     appId: "1:632800299142:web:204f249cf28b48b1346907"
   };
 
-  const app      = initializeApp(firebaseConfig);
-  const db       = getFirestore(app);
-  const auth     = getAuth(app);
-  const storage  = getStorage(app);
-  const functions = getFunctions(app, "asia-south1");
+  let app, db, auth, storage, functions;
+  try {
+    app      = initializeApp(firebaseConfig);
+    db       = getFirestore(app);
+    auth     = getAuth(app);
+    storage  = getStorage(app);
+    functions = getFunctions(app, "asia-south1");
+  } catch (e) {
+    console.error("Firebase initialization failed", e);
+  }
 
   window._db        = db;
   window._auth      = auth;
